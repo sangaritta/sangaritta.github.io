@@ -1,22 +1,24 @@
 /*
  * Copyright 2018, 2019, 2020 Dooboolab.
+ * Copyright 2021, 2022, 2023, 2024 Canardoux.
  *
  * This file is part of Flutter-Sound.
  *
  * Flutter-Sound is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License version 3 (LGPL-V3), as published by
- * the Free Software Foundation.
+ * it under the terms of the Mozilla Public License version 2 (MPL-2.0),
+ * as published by the Mozilla organization.
  *
  * Flutter-Sound is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * MPL General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Flutter-Sound.  If not, see <https://www.gnu.org/licenses/>.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-const VERSION = '9.6.0'
+const VERSION = '9.19.1'
 
 
 const VERBOSE = 0;
@@ -80,19 +82,19 @@ const tabCodec =
 const mime_types =
                 [
                         'audio/webm\;codecs=opus', // defaultCodec,
-                        'audio/aac', // aacADTS,
-                        'audio/opus\;codecs=opus', // opusOGG,
+                        'audio/aac', // aacADTS, //*
+                        'audio/opus\;codecs=opus', // opusOGG, // 'audio/ogg' 'audio/opus'
                         'audio/x-caf', // opusCAF,
-                        'audio/mp3', // mp3,
-                        'audio/ogg\;codecs=vorbis', // vorbisOGG,
+                        'audio/mpeg', // mp3, //*
+                        'audio/ogg\;codecs=vorbis', // vorbisOGG,// 'audio/ogg' // 'audio/vorbis'
                         'audio/pcm', // pcm16,
                         'audio/wav\;codecs=1', // pcm16WAV,
                         'audio/aiff', // pcm16AIFF,
                         'audio/x-caf', // pcm16CAF,
-                        'audio/x-flac', // flac,
-                        'audio/mp4', // aacMP4,
-                        'audio/AMR', // amrNB,
-                        'audio/AMR-WB', // amrWB,
+                        'audio/x-flac', // flac, // 'audio/flac'
+                        'audio/mp4', // aacMP4, //*
+                        'audio/AMR', // amrNB, //*
+                        'audio/AMR-WB', // amrWB, //*
                         'audio/pcm', // pcm8,
                         'audio/pcm', // pcmFloat32,
                         'audio/webm\;codecs=pcm', // pcmWebM,

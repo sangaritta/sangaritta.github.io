@@ -1,22 +1,24 @@
 /*
  * Copyright 2018, 2019, 2020 Dooboolab.
+ * Copyright 2021, 2022, 2023, 2024 Canardoux.
  *
  * This file is part of Flutter-Sound.
  *
  * Flutter-Sound is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License version 3 (LGPL-V3), as published by
- * the Free Software Foundation.
+ * it under the terms of the Mozilla Public License version 2 (MPL-2.0),
+ * as published by the Mozilla organization.
  *
  * Flutter-Sound is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * MPL General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Flutter-Sound.  If not, see <https://www.gnu.org/licenses/>.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-const RECORDER_VERSION = '9.6.0'
+const RECORDER_VERSION = '9.19.1'
 
 const IS_RECORDER_PAUSED = 1;
 const IS_RECORDER_RECORDING = 2;
@@ -32,8 +34,7 @@ const CB_pauseRecorderCompleted = 3;
 const CB_resumeRecorderCompleted = 4;
 const CB_stopRecorderCompleted = 5;
 const CB_openRecorderCompleted = 6;
-const CB_closeRecorderCompleted = 7;
-const CB_recorder_log = 8;
+const CB_recorder_log = 7;
 
 class FlutterSoundRecorder {
         static newInstance(aCallback, callbackTable) { return new FlutterSoundRecorder(aCallback, callbackTable); }
@@ -76,28 +77,13 @@ class FlutterSoundRecorder {
                 this.deleteObjects();
                 this.localObjects = [];
 
-                this.callbackTable[CB_closeRecorderCompleted](this.callback, IS_RECORDER_STOPPED, true);
+                //this.callbackTable[CB_closeRecorderCompleted](this.callback, IS_RECORDER_STOPPED, true);
                 this.callbackTable[CB_recorder_log](this.callback, DBG, 'JS:<--- releaseFlautoRecorder');
         }
 
 
         setAudioFocus(focus, category, mode, audioFlags, device) {
                 this.callbackTable[CB_recorder_log](this.callback, DBG, 'setAudioFocus');
-        }
-
-
-        isEncoderSupported(codec) {
-                /*
-                                for (var i in mime_types)
-                                {
-                                }
-                */
-                var r = MediaRecorder.isTypeSupported(mime_types[codec]);
-                if (r)
-                        this.callbackTable[CB_recorder_log](this.callback, DBG, 'mime_types[codec] encoder is supported');
-                else
-                        this.callbackTable[CB_recorder_log](this.callback, DBG, 'mime_types[codec] encoder is NOT supported');
-                return r;
         }
 
 
@@ -197,9 +183,9 @@ class FlutterSoundRecorder {
                 mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
                 me.mediaStream = mediaStream;
 
-                const audioContext = new AudioContext();
-                const _audioSource = audioContext.createMediaStreamSource(mediaStream);
-                const analyser = audioContext.createAnalyser();
+                this.audioContext = new AudioContext();
+                const _audioSource = this.audioContext.createMediaStreamSource(mediaStream);
+                const analyser = this.audioContext.createAnalyser();
                 // todo: review if this values are right (set to mimic a behaviour closest to that of Android)
                 analyser.fftSize = 512;
                 analyser.minDecibels = -110;
@@ -329,15 +315,15 @@ class FlutterSoundRecorder {
                                                                 var fileReader = new FileReader();
                                                                 xhr.open("GET", url, true);
                                                                 xhr.responseType = "arraybuffer";
-                        
-                        
+
+
                                                                 xhr.addEventListener("load", function ()
                                                                 {
                                                                         if (xhr.status === 200)
                                                                         {
                                                                                 // Create a blob from the response
                                                                                 blob = new Blob([xhr.response], {type: "audio/webm\;codecs=opus"});
-                        
+
                                                                                 // onload needed since Google Chrome doesn't support addEventListener for FileReader
                                                                                 fileReader.onload = function (evt)
                                                                                 {
@@ -383,6 +369,11 @@ class FlutterSoundRecorder {
                         this.mediaStream.getTracks().forEach(track => track.stop());
                         this.mediaStream = null;
                 }
+                  // Close the audioContext if it exists
+                if (this.audioContext != null) {
+                        this.audioContext.close();
+                        this.audioContext = null;
+                }
                 this.callbackTable[CB_recorder_log](this.callback, DBG, 'JS:<--- stop()');
         }
 
@@ -399,6 +390,11 @@ class FlutterSoundRecorder {
                 if (this.mediaStream != null) {
                         this.mediaStream.getTracks().forEach(track => track.stop());
                         this.mediaStream = null;
+                }
+                  // Close the audioContext if it exists
+                if (this.audioContext != null) {
+                        this.audioContext.close();
+                        this.audioContext = null;
                 }
                 this.callbackTable[CB_recorder_log](this.callback, DBG, "JS:<--- stopRecorder");
         }
