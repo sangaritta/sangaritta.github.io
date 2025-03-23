@@ -1,11 +1,11 @@
 {
-    "name": "Portal",
+    "name": "Matter Portal",
     "short_name": "Portal",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Next-generation platform for creators to build, launch, and grow their music careers.",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "description": "Music Distribution Portal",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
@@ -31,5 +31,6 @@
             "type": "image/png",
             "purpose": "maskable"
         }
-    ]
+    ],
+    "gcm_sender_id": "282540499079"
 }

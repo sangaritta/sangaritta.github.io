@@ -87,8 +87,11 @@
       right: 0;
     }
   </style>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js"></script>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js"></script>
+  
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
@@ -99,11 +102,30 @@
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("/flutter_service_worker.js");
-        navigator.serviceWorker.register("/firebase-messaging-sw.js");
+        // Register the Flutter service worker first
+        _flutter.loader.load({
+          serviceWorker: {
+            serviceWorkerVersion: '"271102811"',
+          }
+        });
+        
+        // Then register Firebase messaging service worker
+        navigator.serviceWorker.register("/firebase-messaging-sw.js")
+          .then(function(registration) {
+            console.log('Firebase Service Worker registered with scope:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('Firebase Service Worker registration failed:', error);
+          });
       });
     }
-    </script>
+  </script>
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    // Note: Using "271102811" template token instead of local variable
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
 </head>
 <body>
   <picture id="splash">
@@ -112,13 +134,18 @@
       <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
   <script src="flutter_bootstrap.js" async=""></script>
-
-
-
-
-
-
-
-
-
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Use newer Flutter loader API
+      _flutter.loader.load({
+        serviceWorker: {
+          serviceWorkerVersion: '"271102811"',
+        }
+      }).then(function(engineInitializer) {
+        return engineInitializer.initializeEngine();
+      }).then(function(appRunner) {
+        return appRunner.runApp();
+      });
+    });
+  </script>
 </body></html>
