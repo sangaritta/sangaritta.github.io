@@ -88,9 +88,11 @@
     }
   </style>
   
-  <!-- Firebase SDK -->
+  <!-- Firebase SDK removed to prevent initialization issues -->
+  <!-- 
   <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js"></script>
+  -->
   
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
@@ -102,14 +104,15 @@
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
-        // Register the Flutter service worker first
+        // Register only the Flutter service worker
         _flutter.loader.load({
           serviceWorker: {
-            serviceWorkerVersion: '"2361153762"',
+            serviceWorkerVersion: '"372502175"',
           }
         });
         
-        // Then register Firebase messaging service worker
+        // Firebase messaging service worker registration is disabled 
+        /* 
         navigator.serviceWorker.register("/firebase-messaging-sw.js")
           .then(function(registration) {
             console.log('Firebase Service Worker registered with scope:', registration.scope);
@@ -117,12 +120,13 @@
           .catch(function(error) {
             console.log('Firebase Service Worker registration failed:', error);
           });
+        */
       });
     }
   </script>
   <script>
     // The value below is injected by flutter build, do not touch.
-    // Note: Using "2361153762" template token instead of local variable
+    // Note: Using "372502175" template token instead of local variable
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -139,7 +143,7 @@
       // Use newer Flutter loader API
       _flutter.loader.load({
         serviceWorker: {
-          serviceWorkerVersion: '"2361153762"',
+          serviceWorkerVersion: '"372502175"',
         }
       }).then(function(engineInitializer) {
         return engineInitializer.initializeEngine();

@@ -1,6 +1,9 @@
-importScripts("https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js");
-importScripts("https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js");
+// Firebase messaging service worker is temporarily disabled
+// Original imports commented out
+// importScripts("https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js");
+// importScripts("https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js");
 
+/*
 firebase.initializeApp({
   apiKey: "AIzaSyBaOe8BzcT-d9OmiRXTHJVMB8noE9ZQmto",
   authDomain: "matterportal.firebaseapp.com",
@@ -54,3 +57,7 @@ self.addEventListener('notificationclick', function(event) {
     })
   );
 });
+*/
+
+// Empty service worker that doesn't do anything
+console.log('FCM service worker disabled temporarily');
