@@ -1,1 +1,0 @@
-# sangaritta.github.io

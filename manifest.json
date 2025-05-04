@@ -1,11 +1,11 @@
 {
-    "name": "Matter Portal",
-    "short_name": "Portal",
+    "name": "portal",
+    "short_name": "portal",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#000000",
-    "description": "Music Distribution Portal",
+    "background_color": "#FFFFFF",
+    "theme_color": "#8D63FFFF",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
@@ -31,6 +31,5 @@
             "type": "image/png",
             "purpose": "maskable"
         }
-    ],
-    "gcm_sender_id": "282540499079"
+    ]
 }

@@ -16,18 +16,18 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Next-generation platform for creators to build, launch, and grow their music careers.">
+  <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Portal">
+  <meta name="apple-mobile-web-app-title" content="portal">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <title>Portal</title>
+  <title>portal</title>
   <link rel="manifest" href="manifest.json">
   <style id="splash-screen-style">
     html {
@@ -37,7 +37,7 @@
     body {
       margin: 0;
       min-height: 100%;
-      background-color: #000000;
+      background-color: #300658;
           background-size: 100% 100%;
     }
 
@@ -87,13 +87,6 @@
       right: 0;
     }
   </style>
-  
-  <!-- Firebase SDK removed to prevent initialization issues -->
-  <!-- 
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js"></script>
-  -->
-  
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
@@ -101,35 +94,7 @@
       document.body.style.background = "transparent";
     }
   </script>
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        // Register only the Flutter service worker
-        _flutter.loader.load({
-          serviceWorker: {
-            serviceWorkerVersion: '"372502175"',
-          }
-        });
-        
-        // Firebase messaging service worker registration is disabled 
-        /* 
-        navigator.serviceWorker.register("/firebase-messaging-sw.js")
-          .then(function(registration) {
-            console.log('Firebase Service Worker registered with scope:', registration.scope);
-          })
-          .catch(function(error) {
-            console.log('Firebase Service Worker registration failed:', error);
-          });
-        */
-      });
-    }
-  </script>
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    // Note: Using "372502175" template token instead of local variable
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 </head>
 <body>
   <picture id="splash">
@@ -138,18 +103,6 @@
       <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
   <script src="flutter_bootstrap.js" async=""></script>
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Use newer Flutter loader API
-      _flutter.loader.load({
-        serviceWorker: {
-          serviceWorkerVersion: '"372502175"',
-        }
-      }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        return appRunner.runApp();
-      });
-    });
-  </script>
+
+
 </body></html>
